@@ -1,0 +1,30 @@
+<launch>
+  <!--Create a default name corresponding to the variable name
+  assigned with $(arg variablename) -->
+  <arg name="name" default="turtle"/>
+  <!-- Typically, you might use this in a separate file where you want the object to have a specific name-->
+  <arg name="name" value="velocity1"/>
+  <!-- Parameters are able to be changed on the fly unlike args
+  for example you're able to change the background color here as you are able to in the terminal-->
+  <param name="background" value="0"/>
+
+  <!-- Create groups of nodes effectively allowing you to run multiple terminals at once
+  to run turle-->
+  <group ns="turtlesim1">
+    <node pkg="turtlesim" name="$(arg name)" type="turtlesim_node"/>
+  </group>
+
+  <!-- ns means namespace, you could also throw and if= if you wanted the group to run based on something-->
+  <group ns="turtlesim2">
+    <node pkg="turtlesim" name="$(arg name)" type="turtlesim_node"/>
+  </group>
+
+  <!-- If you wanted the turtles to run independently, you would make the name value the name of the
+  topic used to control their velocity (/turtle1/cmd_vel). Then Remap the to= to specific turtle names -->
+  <node pkg="turtlesim" name="mimic" type="mimic">
+    <!-- As you can see the two turtles are called but mapped to react to turtle1-->
+    <remap from="input" to="turtlesim1/turtle1"/>
+    <remap from="output" to="turtlesim2/turtle1"/>
+  </node>
+
+</launch>

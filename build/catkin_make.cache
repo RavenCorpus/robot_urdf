@@ -1,0 +1,2 @@
+mobile_manipulator_body
+-DCATKIN_DEVEL_PREFIX=/home/rvncorpus/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rvncorpus/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=mobile_manipulator_body -G Unix Makefiles
